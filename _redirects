@@ -1,4 +1,1 @@
-/index.html https://www.wagandwalk.uk/ 301
-http://wagandwalk.uk/* https://www.wagandwalk.uk/:splat 301
-https://wagandwalk.uk/* https://www.wagandwalk.uk/:splat 301
-http://www.wagandwalk.uk/* https://www.wagandwalk.uk/:splat 301
+/index.html / 301
