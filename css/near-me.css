@@ -1,0 +1,18 @@
+.near-me-hero h1 { font-size: clamp(2.25rem, 7vw, 4.35rem); }
+.section-intro { max-width: 760px; }
+.coverage-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 28px; }
+.coverage-card { position: relative; display: grid; gap: 2px; min-height: 96px; padding: 18px 48px 18px 18px; align-content: center; color: var(--green-dark); background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 8px 24px rgba(18,71,27,.06); }
+.coverage-card:hover { background: var(--green-soft); text-decoration: none; transform: translateY(-2px); }
+.coverage-card span { font-size: 1.12rem; font-weight: 900; }
+.coverage-card small { color: var(--muted); font-weight: 700; }
+.coverage-card svg { position: absolute; right: 16px; top: 50%; width: 24px; height: 24px; transform: translateY(-50%); fill: none; stroke: var(--green); stroke-width: 2; }
+.flex-options-section { padding-bottom: 34px; }
+.flex-highlight { align-self: start; }
+.flex-highlight .check-list { margin-bottom: 22px; }
+.coverage-cta { padding: 54px 0; background: var(--green-dark); color: #fff; }
+.coverage-cta h2, .coverage-cta p, .coverage-cta .eyebrow { color: #fff; }
+.coverage-cta .button.primary { background: #fff; color: var(--green-dark); border-color: #fff; }
+.coverage-cta .button.secondary { background: transparent; color: #fff; border-color: rgba(255,255,255,.75); }
+.coverage-cta-inner { display: grid; gap: 10px; }
+@media (min-width: 560px) { .coverage-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (min-width: 900px) { .coverage-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } .coverage-cta-inner { grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 28px; } }
