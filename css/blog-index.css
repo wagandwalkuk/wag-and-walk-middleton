@@ -1,0 +1,34 @@
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  max-width: none;
+}
+
+.blog-grid .blog-card {
+  display: block;
+}
+
+.blog-grid .blog-card.featured {
+  display: grid;
+}
+
+.blog-grid .blog-card h3 {
+  font-size: 1.35rem;
+}
+
+.blog-grid .text-link {
+  display: inline-block;
+  margin-top: 4px;
+}
+
+@media (min-width: 760px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .blog-grid .blog-card.featured {
+    grid-column: 1 / -1;
+    grid-template-columns: 280px 1fr;
+  }
+}
