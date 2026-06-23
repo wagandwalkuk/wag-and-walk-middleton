@@ -1,0 +1,103 @@
+.dbs-check-layout { align-items: center; }
+.dbs-status-card {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 6px solid var(--green);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+.dbs-status-heading {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.dbs-status-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+}
+.dbs-status-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.dbs-status-label {
+  margin: 0 0 2px;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.dbs-status-heading h2 { margin: 0; font-size: clamp(2rem, 5vw, 2.8rem); }
+.dbs-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-size: .8rem;
+  font-weight: 900;
+}
+.dbs-status-badge::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green);
+}
+.dbs-status-details { margin: 0; }
+.dbs-status-details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+.dbs-status-details dt { color: var(--muted); }
+.dbs-status-details dd {
+  margin: 0;
+  color: var(--green-dark);
+  font-weight: 900;
+  text-align: right;
+}
+.dbs-status-note { margin: 18px 0 10px; color: var(--muted); font-size: .92rem; }
+.dbs-check-preview {
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.dbs-check-preview img { display: block; width: 100%; height: auto; }
+.dbs-check-preview figcaption {
+  padding: 14px 18px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+.dbs-check-section .button { margin-top: 8px; }
+#contact-form { scroll-margin-top: 92px; }
+@media (max-width: 480px) {
+  .dbs-status-card { padding: 20px; }
+  .dbs-status-heading { grid-template-columns: auto minmax(0, 1fr); }
+  .dbs-status-badge { grid-column: 1 / -1; justify-self: start; }
+  .dbs-status-details div { display: grid; gap: 2px; }
+  .dbs-status-details dd { text-align: left; }
+  .dbs-status-card .button { width: 100%; }
+}
