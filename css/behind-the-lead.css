@@ -23,6 +23,45 @@
   color: #fff;
   font-weight: 900;
 }
+.series-card-number svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.series-card-number img { display: block; width: 26px; height: 26px; }
+.blog-filter-bar {
+  padding: 16px 0;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.blog-type-filter {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 6px;
+  background: var(--green-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.blog-type-filter a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--green-dark);
+  font-size: .9rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-align: center;
+}
+.blog-type-filter a:hover { background: #fff; text-decoration: none; }
+.blog-type-filter a[aria-current="page"] { background: var(--green); color: #fff; }
 .series-card h3 { font-size: clamp(1.35rem, 3vw, 1.75rem); }
 .series-card .article-meta { margin-bottom: 8px; }
 .series-themes { display: grid; gap: 14px; margin-top: 24px; }
