@@ -1,10 +1,7 @@
 /index.html / 301
-/web https://web.wagandwalk.uk/ 301
-/web/ https://web.wagandwalk.uk/ 301
-/web.html https://web.wagandwalk.uk/ 301
-/flex-credits.html /flex-credits 301
-/policies.html /policies 301
-/client-registration.html /client-registration 301
+/flex-credits /flex-credits.html 301
+/policies /policies.html 301
+/client-registration /client-registration.html 301
 /pickup-dropoff.html /services.html 301
 /images/favicon.svg /favicon.ico 301
 /behind-the-lead.html /blog.html 302
