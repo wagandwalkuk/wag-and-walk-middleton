@@ -2,6 +2,12 @@
 
 Static HTML website for Wag & Walk Middleton, ready for Cloudflare Pages.
 
+## Before making changes
+
+Read `docs/DEVELOPER_HANDOFF.md` before editing the site.
+
+That guide explains the file structure, SEO rules, redirects, pricing references, forms, policies, blog setup, common troubleshooting checks and deployment notes for future maintainers.
+
 ## Cloudflare redirects
 
 The `_redirects` file only contains relative static asset redirects, for example `/index.html / 301`.
