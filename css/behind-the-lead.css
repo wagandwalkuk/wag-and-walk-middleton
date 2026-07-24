@@ -47,21 +47,48 @@
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
-.blog-type-filter a {
+.blog-filter-panel {
+  position: sticky;
+  top: 72px;
+  z-index: 30;
+  padding: 10px 0 14px;
+  margin-top: 18px;
+  background: #fff;
+}
+.blog-type-filter a,
+.blog-type-filter button {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 50px;
   padding: 8px 10px;
+  border: 0;
   border-radius: 6px;
+  background: transparent;
   color: var(--green-dark);
+  font: inherit;
   font-size: .9rem;
   font-weight: 900;
   line-height: 1.2;
   text-align: center;
+  cursor: pointer;
 }
-.blog-type-filter a:hover { background: #fff; text-decoration: none; }
-.blog-type-filter a[aria-current="page"] { background: var(--green); color: #fff; }
+.blog-type-filter a:hover,
+.blog-type-filter button:hover { background: #fff; text-decoration: none; }
+.blog-type-filter a[aria-current="page"],
+.blog-type-filter button[aria-pressed="true"] { background: var(--green); color: #fff; }
+.blog-results-meta {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: .92rem;
+  font-weight: 800;
+}
+.blog-card[hidden] { display: none !important; }
+.blog-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
 .series-card h3 { font-size: clamp(1.35rem, 3vw, 1.75rem); }
 .series-card .article-meta { margin-bottom: 8px; }
 .series-themes { display: grid; gap: 14px; margin-top: 24px; }
