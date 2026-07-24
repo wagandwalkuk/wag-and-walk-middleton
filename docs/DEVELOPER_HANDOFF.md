@@ -51,7 +51,7 @@ Before making changes, check:
 - `sitemap.xml` if adding, removing, renaming or hiding a public page.
 - Canonical tags and Open Graph URLs if changing URLs.
 - LocalBusiness or BlogPosting schema if changing services, pricing, contact details or articles.
-- `_redirects` and `_worker.js` if changing URL behaviour.
+- `_redirects` and Cloudflare dashboard redirect rules if changing URL behaviour.
 
 ## File Structure
 
@@ -273,7 +273,6 @@ Common metadata files:
 - `robots.txt`
 - `_headers`
 - `_redirects`
-- `_worker.js`
 
 ## Structured Data
 
@@ -389,7 +388,7 @@ Non-www to www:
 - Source hostname: `wagandwalk.uk`
 - Target: `https://www.wagandwalk.uk/${uri.path}`
 - Status: `301`
-- `_worker.js` exists in the repo but is excluded from static asset uploads via `.assetsignore`, so do not rely on it for live redirects unless the deployment setup is changed.
+- Do not use a root-level `_worker.js` for this static deployment unless the Cloudflare setup is intentionally changed.
 
 Cloudflare dashboard may also contain Page Rules or Redirect Rules. Avoid creating conflicting rules that redirect `www` back to non-www or force `.html` to extensionless URLs.
 
@@ -587,7 +586,6 @@ Files relevant to deployment:
 
 - `_headers`
 - `_redirects`
-- `_worker.js`
 - `.assetsignore`
 - `robots.txt`
 - `sitemap.xml`
@@ -598,11 +596,10 @@ Files relevant to deployment:
 - `.wrangler`
 - `node_modules`
 - `.env`
-- `_worker.js`
 - `README.md`
 - package files
 
-Important: if Cloudflare is running `npx wrangler deploy` and the repo root is used as the asset directory, keep `_worker.js` in `.assetsignore`. Wrangler blocks Pages `_worker.js` files from being uploaded as public static assets.
+Important: if Cloudflare is running `npx wrangler deploy` and the repo root is used as the asset directory, do not upload a root-level `_worker.js`. Wrangler blocks Pages `_worker.js` files from being uploaded as public static assets.
 
 If adding documentation:
 
@@ -686,7 +683,7 @@ Check:
 
 Likely causes:
 
-- Cloudflare dashboard rule conflicts with `_worker.js`.
+- Cloudflare dashboard rules conflict with each other.
 - A Page Rule redirects a path back to itself.
 - Non-www and www redirects fight each other.
 - Clean URL and `.html` redirects conflict.
@@ -706,7 +703,7 @@ Likely cause:
 Fix:
 
 - Use only relative redirects in `_redirects`.
-- Put non-www to www behaviour in `_worker.js` or Cloudflare dashboard redirect rules.
+- Put non-www to www behaviour in Cloudflare dashboard redirect rules.
 
 ### Cloudflare Deployment Fails Because Of `_worker.js`
 
@@ -716,8 +713,8 @@ Likely cause:
 
 Fix:
 
-- Keep `_worker.js` listed in `.assetsignore`.
-- If the deployment is later changed to use a proper Worker entrypoint, review this setup before removing the ignore rule.
+- Delete `_worker.js` from the repo or ensure it is not uploaded.
+- Use the Cloudflare dashboard redirect rule for non-www to www instead.
 
 ### Contact Form Does Not Submit
 
