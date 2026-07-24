@@ -385,8 +385,11 @@ Important:
 
 Non-www to www:
 
-- Handled by `_worker.js`.
-- `_worker.js` redirects `wagandwalk.uk` to `www.wagandwalk.uk`.
+- Handle this in the Cloudflare dashboard using a Redirect Rule.
+- Source hostname: `wagandwalk.uk`
+- Target: `https://www.wagandwalk.uk/${uri.path}`
+- Status: `301`
+- `_worker.js` exists in the repo but is excluded from static asset uploads via `.assetsignore`, so do not rely on it for live redirects unless the deployment setup is changed.
 
 Cloudflare dashboard may also contain Page Rules or Redirect Rules. Avoid creating conflicting rules that redirect `www` back to non-www or force `.html` to extensionless URLs.
 
@@ -595,8 +598,11 @@ Files relevant to deployment:
 - `.wrangler`
 - `node_modules`
 - `.env`
+- `_worker.js`
 - `README.md`
 - package files
+
+Important: if Cloudflare is running `npx wrangler deploy` and the repo root is used as the asset directory, keep `_worker.js` in `.assetsignore`. Wrangler blocks Pages `_worker.js` files from being uploaded as public static assets.
 
 If adding documentation:
 
@@ -701,6 +707,17 @@ Fix:
 
 - Use only relative redirects in `_redirects`.
 - Put non-www to www behaviour in `_worker.js` or Cloudflare dashboard redirect rules.
+
+### Cloudflare Deployment Fails Because Of `_worker.js`
+
+Likely cause:
+
+- Wrangler is trying to upload `_worker.js` as a public static asset.
+
+Fix:
+
+- Keep `_worker.js` listed in `.assetsignore`.
+- If the deployment is later changed to use a proper Worker entrypoint, review this setup before removing the ignore rule.
 
 ### Contact Form Does Not Submit
 
