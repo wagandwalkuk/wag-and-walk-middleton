@@ -24,4 +24,4 @@ Handle the non-www to www redirect in the Cloudflare dashboard using a Redirect 
 
 Non-public files such as `.git`, `.wrangler`, `node_modules`, environment files and local project metadata are excluded via `.assetsignore`.
 
-`_worker.js` is also excluded from static asset uploads. Wrangler blocks Pages `_worker.js` files from being uploaded as public assets, so keep `_worker.js` listed in `.assetsignore` unless the deployment setup is changed to use a proper Worker entrypoint.
+Do not upload a root-level `_worker.js` file with the static site. Wrangler blocks Pages `_worker.js` files from being uploaded as public assets. Non-www to www redirects should be handled in the Cloudflare dashboard instead.
