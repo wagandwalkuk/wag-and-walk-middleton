@@ -87,15 +87,20 @@
       <div class="hours"><h3>After your meet and greet</h3><p>New clients will be asked to complete a short <a href="/client-registration.html">client registration form</a> after their meet and greet and before their first walk.</p></div>
       <div class="map-placeholder" role="img" aria-label="Service area map placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18 3 21V6l6-3 6 3 6-3v15l-6 3-6-3Z"/><path d="M9 3v15"/><path d="M15 6v15"/></svg><span>Service area map placeholder</span></div>
     </div>
-    <form id="contact-form" class="contact-form" action="mailto:hello@wagandwalk.uk" method="post" enctype="text/plain" data-contact-form>
+    <form id="contact-form" class="contact-form" action="/api/contact" method="post" data-contact-form>
       <label>Your Name<input required name="name" autocomplete="name"></label>
+      <label>Postcode<input name="postcode" autocomplete="postal-code"></label>
+      <label>Dog Name<input name="dogName"></label>
       <label>Phone Number<input required name="phone" autocomplete="tel"></label>
       <label>Email Address<input name="email" type="email" autocomplete="email"></label>
       <label>Service you're interested in<select name="service"><option>I'm not sure yet</option><option>30 Minute Solo Dog Walk</option><option>60 Minute Solo Dog Walk</option><option>House Visits</option><option>Flex Credits</option></select></label>
       <label>What would you most like the walks to provide for your dog?<select name="walk_goal"><option>A break while they are home alone</option><option>More physical exercise</option><option>Mental stimulation and exploration</option><option>Help maintaining a regular routine</option><option>Confidence or individual support</option><option>A mixture of these</option></select></label>
+      <label>Preferred contact method<select name="preferredContactMethod"><option value="no_preference">No preference</option><option value="email">Email</option><option value="phone">Phone call</option><option value="whatsapp">WhatsApp</option></select></label>
       <label>Message<textarea required name="message" rows="6"></textarea></label>
+      <label class="checkbox-label"><input required name="consentConfirmed" type="checkbox"> I agree that Wag & Walk Middleton can use these details to contact me about this enquiry. See the <a href="/policies.html">privacy policy</a>.</label>
+      <p class="form-status" data-contact-status hidden role="status" aria-live="polite"></p>
       <button class="button primary" type="submit">Send Message</button>
-      <p class="form-note">This static form opens your email app. You can also call or WhatsApp for the quickest reply.</p>
+      <p class="form-note">This form sends your enquiry securely to Wag & Walk Middleton. You can also call or WhatsApp for the quickest reply.</p>
     </form>
   </div></section>
   </main>
@@ -126,6 +131,6 @@
 </footer>
   <nav class="floating-contact" aria-label="Quick WhatsApp contact"><a class="floating-whatsapp" href="https://wa.me/447343058095?text=Hello%20Wag%20%26%20Walk%20Middleton%2C%20I%20would%20like%20to%20ask%20about%20pet%20care." aria-label="Contact Wag & Walk Middleton on WhatsApp"><img class="whatsapp-icon" src="/images/whatsapp-icon.png" alt="WhatsApp" width="24" height="24"></a></nav>
   <script src="/js/main.js" defer></script>
-  <script src="/js/contact-prefill.js" defer></script>
+  <script src="/js/contact-form.js" defer></script>
 </body>
 </html>

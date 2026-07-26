@@ -7,3 +7,10 @@
 .price-card h3{margin:24px 0 12px;padding-top:4px}.price-card h3:first-child{margin-top:0;padding-top:0}.price-card h3+.price-row{padding-top:18px}
 .price-card .price-row:has(+ h3){border-bottom:0;margin-bottom:22px}
 .price-card .price-row-before-heading{border-bottom:0;margin-bottom:28px}.price-card .price-section-title{margin:0 0 18px;padding-top:0}.price-card .price-section-title+.price-row{border-top:1px solid var(--line);padding-top:20px}
+
+.checkbox-label { align-items: flex-start; display: flex; gap: 10px; line-height: 1.5; }
+.checkbox-label input { margin-top: 0.25rem; width: auto; }
+.form-status { border-radius: 8px; margin: 0; padding: 12px 14px; }
+.form-status[data-status=success] { background: #e8f5ee; color: #1d5f3d; }
+.form-status[data-status=error] { background: #fdeeee; color: #8f2d2d; }
+.form-status[data-status=info] { background: #eef4fb; color: #285a7a; }

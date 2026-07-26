@@ -25,3 +25,16 @@ Handle the non-www to www redirect in the Cloudflare dashboard using a Redirect 
 Non-public files such as `.git`, `.wrangler`, `node_modules`, environment files and local project metadata are excluded via `.assetsignore`.
 
 Do not upload a root-level `_worker.js` file with the static site. Wrangler blocks Pages `_worker.js` files from being uploaded as public assets. Non-www to www redirects should be handled in the Cloudflare dashboard instead.
+
+
+## Control Centre lead ingestion
+
+The contact form posts to the local Cloudflare Worker route `/api/contact`.
+The Worker validates the form, signs the request server-side and forwards it to the private Wag & Walk Control Centre lead ingestion endpoint.
+
+Required Cloudflare Worker secrets:
+
+- `CONTROL_CENTRE_LEAD_ENDPOINT`
+- `WEBSITE_INGESTION_SECRET`
+
+Do not put `WEBSITE_INGESTION_SECRET` in browser JavaScript or public HTML.
