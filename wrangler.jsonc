@@ -12,5 +12,32 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
-  "main": "src/worker.js"
+  "main": "src/worker.js",
+  "vars": {
+    "CONTROL_CENTRE_LEAD_ENDPOINT": "https://hub.wagandwalk.uk/api/integrations/website/leads"
+  },
+  "routes": [
+    {
+      "pattern": "www.wagandwalk.uk/*",
+      "zone_name": "wagandwalk.uk"
+    },
+    {
+      "pattern": "wagandwalk.uk/*",
+      "zone_name": "wagandwalk.uk"
+    },
+    {
+      "pattern": "wagandwalk.uk",
+      "zone_name": "wagandwalk.uk",
+      "custom_domain": true,
+      "enabled": true,
+      "previews_enabled": false
+    },
+    {
+      "pattern": "www.wagandwalk.uk",
+      "zone_name": "wagandwalk.uk",
+      "custom_domain": true,
+      "enabled": true,
+      "previews_enabled": false
+    }
+  ]
 }
