@@ -27,14 +27,22 @@ Non-public files such as `.git`, `.wrangler`, `node_modules`, environment files 
 Do not upload a root-level `_worker.js` file with the static site. Wrangler blocks Pages `_worker.js` files from being uploaded as public assets. Non-www to www redirects should be handled in the Cloudflare dashboard instead.
 
 
-## Control Centre lead ingestion
+## Hub meet-and-greet request ingestion
 
 The contact form posts to the local Cloudflare Worker route `/api/contact`.
-The Worker validates the form, signs the request server-side and forwards it to the private Wag & Walk Control Centre lead ingestion endpoint.
+The Worker validates the form, signs the request server-side and forwards it to the Wag & Walk Hub lead ingestion endpoint:
 
-Required Cloudflare Worker secrets:
+```text
+POST {HUB_BASE_URL}/api/integrations/website/leads
+```
 
-- `CONTROL_CENTRE_LEAD_ENDPOINT`
+The website only sends a meet-and-greet request. It does not book the meet and greet automatically.
+
+Required Cloudflare Worker environment variables:
+
+- `HUB_BASE_URL=https://hub.wagandwalk.uk`
 - `WEBSITE_INGESTION_SECRET`
+
+`WEBSITE_INGESTION_SECRET` must be stored as an encrypted secret variable in Cloudflare, using the same value configured in the Hub.
 
 Do not put `WEBSITE_INGESTION_SECRET` in browser JavaScript or public HTML.

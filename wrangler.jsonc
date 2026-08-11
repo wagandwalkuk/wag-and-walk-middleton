@@ -14,7 +14,7 @@
   ],
   "main": "src/worker.js",
   "vars": {
-    "CONTROL_CENTRE_LEAD_ENDPOINT": "https://hub.wagandwalk.uk/api/integrations/website/leads"
+    "HUB_BASE_URL": "https://hub.wagandwalk.uk"
   },
   "routes": [
     {

@@ -11,6 +11,9 @@ _worker.js
 README.md
 docs
 docs/
+src
+src/
 wrangler.toml
+wrangler.jsonc
 package-lock.json
 package.json

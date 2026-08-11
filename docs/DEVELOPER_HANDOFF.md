@@ -143,8 +143,19 @@ Responsibilities:
 - Mobile navigation toggle.
 - Service Areas dropdown toggle.
 - Dynamic footer year.
-- Static contact form mailto handling.
 - Instagram feed iframe resizing.
+- Blog article filters.
+
+Contact form JavaScript:
+
+- `js/contact-form.js`
+
+Responsibilities:
+
+- Prefills the message field from `?message=...`.
+- Generates a stable `websiteSubmissionId` for each submission attempt.
+- Posts the form to `/api/contact`.
+- Shows loading, success and retryable error states.
 
 Registration JavaScript:
 
@@ -171,9 +182,27 @@ Note:
 Contact form:
 
 - Located in `contact.html`.
-- Uses `mailto:hello@wagandwalk.uk`.
-- Uses `data-contact-form`, which is handled by `js/main.js`.
+- Uses `data-contact-form`, which is handled by `js/contact-form.js`.
+- Posts to the Cloudflare Worker route `/api/contact`.
+- The Worker validates the form, signs the Hub request server-side and forwards it to the Hub lead ingestion endpoint.
 - Query parameter `?message=...` pre-fills the message field.
+- First name, surname, postcode, message and consent are required. The visitor must also provide at least one contact method: email or phone.
+- The browser validates UK postcode formatting and email/phone formatting; the Worker repeats those checks so invalid submissions cannot bypass browser validation.
+- Phone is optional, but must be valid when provided.
+- The form sends a meet-and-greet request only. It must not claim that a meet and greet has been booked automatically.
+- Do not add onboarding, key-safe, vet, medical, payment or recurring booking details to the public website form. Those belong in the Hub onboarding flow.
+
+Required Cloudflare Worker environment variables:
+
+- `HUB_BASE_URL=https://hub.wagandwalk.uk`
+- `WEBSITE_INGESTION_SECRET` as an encrypted secret
+
+Security rules:
+
+- Never expose `WEBSITE_INGESTION_SECRET` in public HTML or browser JavaScript.
+- Only send fields accepted by the Hub website lead contract.
+- Keep honeypot/spam fields out of the Hub payload.
+- Keep request bodies below 12 KB.
 
 Example DBS request link:
 
@@ -718,14 +747,14 @@ Fix:
 
 ### Contact Form Does Not Submit
 
-The form opens the visitor’s email app. It is not a server-side form.
+The form posts to `/api/contact`; the Cloudflare Worker validates it and sends a signed request to the Wag & Walk Hub.
 
 Check:
 
-- Browser has an email app configured.
-- `data-contact-form` is present.
-- `js/main.js` is loading.
-- CSP allows `mailto:` in `form-action`.
+- `data-contact-form` is present and `js/contact-form.js` is loading.
+- Cloudflare has `HUB_BASE_URL` and encrypted `WEBSITE_INGESTION_SECRET` configured.
+- The deployed Worker is `src/worker.js`, rather than an uploaded root `_worker.js` asset.
+- Worker logs and the Hub ingestion endpoint response for the relevant submission.
 
 ### Client Registration Form Does Not Open From Shared Link
 

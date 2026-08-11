@@ -74,7 +74,7 @@
     </div>
   </div>
 </section>
-  <section class="section"><div class="container contact-grid">
+  <section class="section"><div class="container contact-grid contact-grid--form-first">
     <div>
       <p class="eyebrow">Get in Touch</p>
       <h2>Book a free meet and greet</h2>
@@ -85,22 +85,25 @@
       </div>
       <div class="hours"><h3>Business Hours</h3><p>Monday to Friday: 8:00am - 6:00pm</p><p>Saturday: 9:00am - 2:00pm</p><p>Sunday: By arrangement</p></div>
       <div class="hours"><h3>After your meet and greet</h3><p>New clients will be asked to complete a short <a href="/client-registration.html">client registration form</a> after their meet and greet and before their first walk.</p></div>
-      <div class="map-placeholder" role="img" aria-label="Service area map placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18 3 21V6l6-3 6 3 6-3v15l-6 3-6-3Z"/><path d="M9 3v15"/><path d="M15 6v15"/></svg><span>Service area map placeholder</span></div>
     </div>
     <form id="contact-form" class="contact-form" action="/api/contact" method="post" data-contact-form>
-      <label>Your Name<input required name="name" autocomplete="name"></label>
-      <label>Postcode<input name="postcode" autocomplete="postal-code"></label>
-      <label>Dog Name<input name="dogName"></label>
-      <label>Phone Number<input required name="phone" autocomplete="tel"></label>
-      <label>Email Address<input name="email" type="email" autocomplete="email"></label>
-      <label>Service you're interested in<select name="service"><option>I'm not sure yet</option><option>30 Minute Solo Dog Walk</option><option>60 Minute Solo Dog Walk</option><option>House Visits</option><option>Flex Credits</option></select></label>
+      <input type="hidden" name="websiteSubmissionId" data-submission-id>
+      <label class="form-honeypot" aria-hidden="true" tabindex="-1">Leave this field blank<input name="website" autocomplete="off" tabindex="-1"></label>
+      <label>First Name<input required name="firstName" autocomplete="given-name" maxlength="80"></label>
+      <label>Surname<input required name="lastName" autocomplete="family-name" maxlength="80"></label>
+      <label>Email Address<input name="email" type="email" autocomplete="email" maxlength="160"></label>
+      <label>Phone Number<input name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" pattern="[0-9+() -]{10,40}" title="Enter a valid phone number using at least 10 digits."></label>
+      <label>Postcode<input required name="postcode" autocomplete="postal-code" inputmode="text" maxlength="8" pattern="[A-Za-z]{1,2}[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}" title="Enter a valid UK postcode, for example M24 4GB."></label>
+      <label>Dog Name <span class="label-note">optional</span><input name="dogName" maxlength="80"></label>
+      <label>Service you're interested in<select name="service"><option>I'm not sure yet</option><option>30 Minute Solo Walk</option><option>60 Minute Solo Walk</option><option>House Visit</option><option>Flex Credits</option></select></label>
+      <label>Availability for a meet and greet<textarea name="meetAndGreetAvailability" rows="4" maxlength="1200" placeholder="For example: weekday evenings, Saturday morning, or flexible around shifts."></textarea></label>
       <label>What would you most like the walks to provide for your dog?<select name="walk_goal"><option>A break while they are home alone</option><option>More physical exercise</option><option>Mental stimulation and exploration</option><option>Help maintaining a regular routine</option><option>Confidence or individual support</option><option>A mixture of these</option></select></label>
       <label>Preferred contact method<select name="preferredContactMethod"><option value="no_preference">No preference</option><option value="email">Email</option><option value="phone">Phone call</option><option value="whatsapp">WhatsApp</option></select></label>
-      <label>Message<textarea required name="message" rows="6"></textarea></label>
-      <label class="checkbox-label"><input required name="consentConfirmed" type="checkbox"> I agree that Wag & Walk Middleton can use these details to contact me about this enquiry. See the <a href="/policies.html">privacy policy</a>.</label>
+      <label>Message<textarea required name="message" rows="6" maxlength="4000" placeholder="Hello Nathan, I would like to arrange a free meet and greet. I am available on [days/times] and would like to discuss support for my dog."></textarea></label>
+      <label class="checkbox-label"><input required name="consentConfirmed" type="checkbox"> I agree that Wag & Walk Middleton can use these details to contact me about this enquiry. See the <a href="/policies.html">policies</a>.</label>
       <p class="form-status" data-contact-status hidden role="status" aria-live="polite"></p>
-      <button class="button primary" type="submit">Send Message</button>
-      <p class="form-note">This form sends your enquiry securely to Wag & Walk Middleton. You can also call or WhatsApp for the quickest reply.</p>
+      <button class="button primary" type="submit">Send Meet-and-Greet Request</button>
+      <p class="form-note">This sends a request to Wag & Walk Middleton. It does not book a meet and greet automatically; Nathan will review it and contact you to arrange the next step.</p>
     </form>
   </div></section>
   </main>

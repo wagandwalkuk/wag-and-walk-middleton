@@ -14,3 +14,6 @@
 .form-status[data-status=success] { background: #e8f5ee; color: #1d5f3d; }
 .form-status[data-status=error] { background: #fdeeee; color: #8f2d2d; }
 .form-status[data-status=info] { background: #eef4fb; color: #285a7a; }
+.form-honeypot { position: absolute; left: -100vw; width: 1px; height: 1px; overflow: hidden; }
+.label-note { color: var(--muted); font-size: .9rem; font-weight: 700; }
+@media (max-width:759px){.contact-grid--form-first .contact-form{order:-1}}
