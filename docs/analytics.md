@@ -44,8 +44,9 @@ The following events are sent only after analytics consent has been granted:
 | `contact_phone` | A `tel:` link is selected | `link_location`, `cta_label` |
 | `contact_email` | A `mailto:` link is selected | `link_location`, `cta_label` |
 | `contact_whatsapp` | A WhatsApp link is selected | `link_location`, `cta_label` |
+| `preferred_source_interaction` | A visitor selects Google's Preferred Sources control on editorial content | `page_path`, `page_type`, `placement` |
 
-Do not add names, email addresses, telephone numbers, postcodes, dog names, free-text messages or any other personally identifiable information to GA4 parameters. The contact form event is deliberately triggered only after the Worker accepts the request, not on form submit.
+Do not add names, email addresses, telephone numbers, postcodes, dog names, free-text messages or any other personally identifiable information to GA4 parameters. The contact form event is deliberately triggered only after the Worker accepts the request, not on form submit. The Preferred Sources event records only a visitor interaction; Google does not expose a reliable completion signal, so it must never be interpreted as confirmation that the site was added.
 
 ## Local Development
 

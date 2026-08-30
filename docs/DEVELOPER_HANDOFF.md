@@ -453,6 +453,7 @@ Current external integrations allowed:
 - Mirror App Instagram feed
 - Google Forms iframe
 - jsDelivr iframe bridge
+- Google Preferred Sources button (`https://news.google.com/swg/js/v1/publisher.js`)
 - WhatsApp links
 
 ## Social And External Integrations
@@ -545,6 +546,14 @@ When adding a Behind The Lead post:
 - Add to `sitemap.xml` if it should be public.
 - Use `https://www.wagandwalk.uk/behind-the-lead/slug.html` canonical.
 - Use `index, follow` only when the post is ready to publish.
+
+### Google Preferred Sources
+
+`js/preferred-sources.js` is the shared static-site component for Google's official Preferred Sources control. `js/main.js` loads it only on the blog index, Behind The Lead index and individual pages under `/blog/` or `/behind-the-lead/`. It creates one secondary card before the existing contact strip, then loads Google's official script asynchronously.
+
+Do not manually paste Google's script or button markup into an article. New public editorial pages under those paths inherit the component automatically. Do not add it to commercial pages such as home, services, area pages, prices, contact, onboarding or booking journeys.
+
+The control tracks a `preferred_source_interaction` only when the visitor has consented to analytics. It records a click on the embedded control, not a completed Google preference change.
 
 ## Reviews
 
