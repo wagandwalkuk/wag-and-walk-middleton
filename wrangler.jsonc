@@ -14,7 +14,8 @@
   ],
   "main": "src/worker.js",
   "vars": {
-    "HUB_BASE_URL": "https://hub.wagandwalk.uk"
+    "HUB_BASE_URL": "https://hub.wagandwalk.uk",
+    "GA4_MEASUREMENT_ID": "G-1RPK1RVGN0"
   },
   "routes": [
     {
