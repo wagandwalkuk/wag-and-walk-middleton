@@ -30,6 +30,10 @@ const CONTACT_METHODS = new Set(["email", "phone", "whatsapp", "no_preference"])
 const worker = {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const canonicalLocation = getCanonicalLocation(url, request.headers.get("host"));
+    if (canonicalLocation) {
+      return Response.redirect(canonicalLocation, 301);
+    }
     if (request.method === "POST" && url.pathname === "/api/contact") {
       return handleContactSubmission(request, env);
     }
@@ -41,6 +45,29 @@ const worker = {
 };
 
 export default worker;
+
+function getCanonicalLocation(url, requestHost) {
+  const incomingHost = String(requestHost || url.hostname).split(":")[0].toLowerCase();
+  const isNonWwwHost = incomingHost === "wagandwalk.uk";
+  const isLegacyPickUpRoute = url.pathname === "/pickup-dropoff" || url.pathname === "/pickup-dropoff.html";
+  const isIndexDocument = url.pathname === "/index.html";
+  const isHtmlDocument = url.pathname.endsWith(".html");
+
+  if (!isNonWwwHost && !isLegacyPickUpRoute && !isIndexDocument && !isHtmlDocument) {
+    return "";
+  }
+
+  let pathname = url.pathname;
+  if (isLegacyPickUpRoute) {
+    pathname = "/services";
+  } else if (isIndexDocument) {
+    pathname = "/";
+  } else if (isHtmlDocument) {
+    pathname = pathname.slice(0, -5);
+  }
+
+  return `https://www.wagandwalk.uk${pathname}${url.search}`;
+}
 
 async function handleContactSubmission(request, env) {
   try {
@@ -138,12 +165,12 @@ function normaliseContactMethod(value) {
 
 function safeSourcePage(request) {
   const referer = request.headers.get("referer");
-  if (!referer) return new URL("/contact.html", request.url).toString();
+  if (!referer) return new URL("/contact", request.url).toString();
   try {
     const url = new URL(referer);
     return url.toString().slice(0, FIELD_LIMITS.sourcePage);
   } catch {
-    return new URL("/contact.html", request.url).toString();
+    return new URL("/contact", request.url).toString();
   }
 }
 
