@@ -33,7 +33,11 @@ const worker = {
     if (request.method === "POST" && url.pathname === "/api/contact") {
       return handleContactSubmission(request, env);
     }
-    return env.ASSETS.fetch(request);
+    if (request.method === "GET" && url.pathname === "/api/analytics-config") {
+      return analyticsConfig(env);
+    }
+    const response = await env.ASSETS.fetch(request);
+    return injectAnalyticsClient(response, url, request.method);
   }
 };
 
@@ -222,5 +226,32 @@ function json(payload, status) {
   return new Response(JSON.stringify(payload), {
     status,
     headers: { "content-type": "application/json; charset=utf-8" }
+  });
+}
+
+function analyticsConfig(env) {
+  const measurementId = String(env.GA4_MEASUREMENT_ID || "").trim();
+  const enabled = /^G-[A-Z0-9]+$/i.test(measurementId);
+  return new Response(JSON.stringify({ enabled, measurementId: enabled ? measurementId : "" }), {
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store"
+    }
+  });
+}
+
+async function injectAnalyticsClient(response, url, method) {
+  const contentType = response.headers.get("content-type") || "";
+  if (method !== "GET" || !contentType.includes("text/html") || url.pathname.startsWith("/web/")) return response;
+
+  const html = await response.text();
+  if (!/<\/head\s*>/i.test(html)) return new Response(html, response);
+
+  const headers = new Headers(response.headers);
+  headers.delete("content-length");
+  return new Response(html.replace(/<\/head\s*>/i, '  <script src="/js/analytics.js" defer></script>\n</head>'), {
+    status: response.status,
+    statusText: response.statusText,
+    headers
   });
 }

@@ -4,7 +4,7 @@ Static HTML website for Wag & Walk Middleton, ready for Cloudflare Pages.
 
 ## Before making changes
 
-Read `docs/DEVELOPER_HANDOFF.md` before editing the site.
+Read `docs/DEVELOPER_HANDOFF.md` before editing the site. For analytics, consent and GA4 event tracking, also read `docs/analytics.md`.
 
 That guide explains the file structure, SEO rules, redirects, pricing references, forms, policies, blog setup, common troubleshooting checks and deployment notes for future maintainers.
 
@@ -46,3 +46,9 @@ Required Cloudflare Worker environment variables:
 `WEBSITE_INGESTION_SECRET` must be stored as an encrypted secret variable in Cloudflare, using the same value configured in the Hub.
 
 Do not put `WEBSITE_INGESTION_SECRET` in browser JavaScript or public HTML.
+
+## Website analytics
+
+Google Analytics 4 is implemented with optional analytics consent. It stays inactive until a visitor accepts analytics cookies and a valid `GA4_MEASUREMENT_ID` Cloudflare environment variable has been configured.
+
+See `docs/analytics.md` for the setup, verification and troubleshooting steps.

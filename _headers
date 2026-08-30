@@ -4,4 +4,4 @@
   X-Frame-Options: SAMEORIGIN
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://app.mirror-app.com https://docs.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; frame-src https://app.mirror-app.com https://docs.google.com; connect-src 'self' https://app.mirror-app.com; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self' mailto:
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://app.mirror-app.com https://docs.google.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; frame-src https://app.mirror-app.com https://docs.google.com; connect-src 'self' https://app.mirror-app.com https://www.google-analytics.com https://region1.google-analytics.com; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self' mailto:

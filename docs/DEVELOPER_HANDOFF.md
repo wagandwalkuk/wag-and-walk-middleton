@@ -4,6 +4,8 @@ Last reviewed: 24 July 2026
 
 This document should be read before making future changes to the Wag & Walk Middleton website. It explains how the site is structured, how key features work, what can go wrong, and what to check before deployment.
 
+For Google Analytics 4, analytics consent and event tracking, read `docs/analytics.md` before changing the website header, footer, contact form, Content Security Policy or Worker.
+
 ## Site Overview
 
 The site is a static HTML website for Wag & Walk Middleton, deployed to Cloudflare Pages.

@@ -46,8 +46,16 @@ if (contactForm) {
         setStatus(status, result.message || "Please check the form and try again.", "error");
         return;
       }
+      const selectedService = serviceType(contactForm.querySelector('[name="service"]'));
       contactForm.reset();
       if (submissionIdField) submissionIdField.value = "";
+      if (window.WagWalkAnalytics) {
+        window.WagWalkAnalytics.trackEvent("generate_lead", {
+          enquiry_type: "meet_and_greet",
+          service_type: selectedService,
+          form_location: window.location.pathname
+        });
+      }
       setStatus(status, result.message, "success");
     } catch {
       setStatus(status, "Sorry, your request could not be sent right now. Please try again, or contact Wag & Walk directly.", "error");
@@ -73,4 +81,16 @@ function createSubmissionId() {
 
 function fieldValue(field) {
   return field && typeof field.value === "string" ? field.value.trim() : "";
+}
+
+function serviceType(field) {
+  const service = field && typeof field.value === "string" ? field.value : "";
+  const values = {
+    "30 Minute Solo Walk": "solo_walk_30",
+    "60 Minute Solo Walk": "solo_walk_60",
+    "House Visit": "house_visit",
+    "Flex Credits": "flex_credits",
+    "I'm not sure yet": "not_sure"
+  };
+  return values[service] || "not_specified";
 }
