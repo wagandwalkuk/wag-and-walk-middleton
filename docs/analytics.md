@@ -10,7 +10,7 @@ The website uses a direct Google Analytics 4 implementation. It does not use Goo
 
 Analytics are optional. The Google tag is not loaded until a visitor chooses **Accept analytics** in the cookie banner. Until then, the website operates normally and no GA4 page views or events are sent.
 
-The browser script is `js/analytics.js`. The Cloudflare Worker injects it into public Wag & Walk HTML pages. It does not inject it into the separate `/web/` site.
+The browser script is `js/analytics.js`. It is referenced by every public Wag & Walk HTML page. It is not referenced by the separate `/web/` site.
 
 GA4 is enabled only when the Cloudflare Worker has a valid environment variable:
 
@@ -97,7 +97,7 @@ GA4 reporting can take time to populate outside Realtime and DebugView.
 
 ### No cookie banner
 
-Check that the requested page is a public Wag & Walk HTML page, not a `/web/` page. Then check the Worker is active and that its response contains:
+Check that the requested page is a public Wag & Walk HTML page, not a `/web/` page. Then check the page source contains:
 
 ```html
 <script src="/js/analytics.js" defer></script>
@@ -113,7 +113,7 @@ The event is only sent after `/api/contact` returns success. Check the form stat
 
 ### Duplicate page views or events
 
-Do not add another Google tag, GA4 plugin, Google Tag Manager container or inline `gtag()` calls to the pages. The Worker injection and `js/analytics.js` are the single source of truth.
+Do not add another Google tag, GA4 plugin, Google Tag Manager container or inline `gtag()` calls to the pages. The shared `js/analytics.js` reference is the single source of truth.
 
 ### Visitor wants to change their choice
 

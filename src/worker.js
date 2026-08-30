@@ -36,8 +36,7 @@ const worker = {
     if (request.method === "GET" && url.pathname === "/api/analytics-config") {
       return analyticsConfig(env);
     }
-    const response = await env.ASSETS.fetch(request);
-    return injectAnalyticsClient(response, url, request.method);
+    return env.ASSETS.fetch(request);
   }
 };
 
@@ -237,21 +236,5 @@ function analyticsConfig(env) {
       "content-type": "application/json; charset=utf-8",
       "cache-control": "no-store"
     }
-  });
-}
-
-async function injectAnalyticsClient(response, url, method) {
-  const contentType = response.headers.get("content-type") || "";
-  if (method !== "GET" || !contentType.includes("text/html") || url.pathname.startsWith("/web/")) return response;
-
-  const html = await response.text();
-  if (!/<\/head\s*>/i.test(html)) return new Response(html, response);
-
-  const headers = new Headers(response.headers);
-  headers.delete("content-length");
-  return new Response(html.replace(/<\/head\s*>/i, '  <script src="/js/analytics.js" defer></script>\n</head>'), {
-    status: response.status,
-    statusText: response.statusText,
-    headers
   });
 }
