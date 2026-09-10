@@ -89,7 +89,9 @@ Expected after deployment: each combination of HTTP/HTTPS and www/non-www for `/
 - `python3 docs/audit_seo.py`: sitemap XML, HTML metadata, JSON-LD parsing, internal targets/anchors and link depth passed. This is targeted structural checking, not a complete W3C HTML conformance certification.
 - `python3 docs/audit_seo.py --live`: checks each live sitemap page and representative variant responses. It performs read-only public GET requests, never form submissions.
 - Browser checks: seven changed content pages at 390px and 1440px passed, with no horizontal overflow, broken loaded images or uncaught page JavaScript errors. Pricing screenshots inspected. The local Wrangler watcher repeatedly reloaded, so layout checks used a plain static server with clean-path support; Worker routing was tested separately. This is not a test of external Google/Mirror services or an actual contact submission.
-- Final live deployment status: recorded after verification below.
+- Release: content/code commit `005abb8` pushed to `main`. Direct `wrangler deploy` completed using the existing configuration after the automatic release had not yet been confirmed. Cloudflare version `06ab7d94-58d4-4fbf-bc68-990f1f187172` serves both production hosts.
+- Live verification: all 46 sitemap URLs returned 200 with correct self-canonical and Open Graph URLs, no conflicting Link header or X-Robots-Tag, and no source link issues. All 20 representative requests passed: 19 legacy/noncanonical variants returned one 301 directly to the final canonical, and the clean HTTPS www control returned 200. Destinations `/`, `/about` and `/services` are included in the successful sitemap checks.
+- All nine modified public pages were fetched and matched the committed HTML byte for byte. A production mobile-browser check of `/prices` confirmed the new cost heading and no uncaught JavaScript errors.
 
 ## 12. Manual actions
 
