@@ -49,15 +49,18 @@ export default worker;
 function getCanonicalLocation(url, requestHost) {
   const incomingHost = String(requestHost || url.hostname).split(":")[0].toLowerCase();
   const isNonWwwHost = incomingHost === "wagandwalk.uk";
-  const isLegacyPickUpRoute = url.pathname === "/pickup-dropoff" || url.pathname === "/pickup-dropoff.html";
-  const isIndexDocument = url.pathname === "/index.html";
-  const isHtmlDocument = url.pathname.endsWith(".html");
+  const isInsecureHost = incomingHost === "www.wagandwalk.uk" && url.protocol === "http:";
+  // Normalise public document slashes, leaving APIs and asset directories alone.
+  const isDocumentSlash = /^\/(?:areas\/dog-walker-[a-z0-9-]+|(?:blog|behind-the-lead)\/[a-z0-9-]+|about|services|prices|contact|reviews|policies|blog|behind-the-lead|pet-visits|flex-credits|client-registration|dog-walker-near-me|pickup-dropoff)\/$/.test(url.pathname);
+  let pathname = isDocumentSlash ? url.pathname.slice(0, -1) : url.pathname;
+  const isLegacyPickUpRoute = pathname === "/pickup-dropoff" || pathname === "/pickup-dropoff.html";
+  const isIndexDocument = pathname === "/index.html";
+  const isHtmlDocument = pathname.endsWith(".html");
 
-  if (!isNonWwwHost && !isLegacyPickUpRoute && !isIndexDocument && !isHtmlDocument) {
+  if (!isNonWwwHost && !isInsecureHost && !isDocumentSlash && !isLegacyPickUpRoute && !isIndexDocument && !isHtmlDocument) {
     return "";
   }
 
-  let pathname = url.pathname;
   if (isLegacyPickUpRoute) {
     pathname = "/services";
   } else if (isIndexDocument) {

@@ -1,6 +1,8 @@
 # Wag & Walk Middleton Website Handoff Guide
 
-Last reviewed: 24 July 2026
+Last reviewed: 10 September 2026
+
+Read `docs/seo-audit-2026-09.md` for the latest verified indexing findings and `docs/seo-audit-2026-08.md` for the canonical migration rationale.
 
 This document should be read before making future changes to the Wag & Walk Middleton website. It explains how the site is structured, how key features work, what can go wrong, and what to check before deployment.
 
@@ -8,7 +10,7 @@ For Google Analytics 4, analytics consent and event tracking, read `docs/analyti
 
 ## Site Overview
 
-The site is a static HTML website for Wag & Walk Middleton, deployed to Cloudflare Pages.
+The site is a static HTML website for Wag & Walk Middleton, deployed to Cloudflare Workers with static assets.
 
 Primary domain:
 
@@ -292,9 +294,9 @@ Every public page should have:
 Canonical rules:
 
 - Homepage canonical: `https://www.wagandwalk.uk/`
-- Standard page canonical: `https://www.wagandwalk.uk/page.html`
-- Area page canonical: `https://www.wagandwalk.uk/areas/dog-walker-area.html`
-- Blog canonical: `https://www.wagandwalk.uk/blog/article-slug.html`
+- Standard page canonical: `https://www.wagandwalk.uk/page`
+- Area page canonical: `https://www.wagandwalk.uk/areas/dog-walker-area`
+- Blog canonical: `https://www.wagandwalk.uk/blog/article-slug`
 - Never canonicalise to non-www.
 - Never canonicalise homepage to `/index.html`.
 
@@ -403,7 +405,8 @@ Current redirects:
 
 ```text
 /index.html / 301
-/pickup-dropoff.html /services.html 301
+/pickup-dropoff /services 301
+/pickup-dropoff.html /services 301
 /images/favicon.svg /favicon.ico 301
 ```
 
@@ -415,10 +418,9 @@ Important:
 
 Non-www to www:
 
-- Handle this in the Cloudflare dashboard using a Redirect Rule.
-- Source hostname: `wagandwalk.uk`
-- Target: `https://www.wagandwalk.uk/${uri.path}`
-- Status: `301`
+- `src/worker.js` handles HTTPS, www and clean document paths together with a 301 redirect.
+- `wrangler.jsonc` runs the Worker before static assets. Preserve this setting.
+- Existing dashboard rules must not conflict with this canonical destination.
 - Do not use a root-level `_worker.js` for this static deployment unless the Cloudflare setup is intentionally changed.
 
 Cloudflare dashboard may also contain Page Rules or Redirect Rules. Avoid creating conflicting rules that redirect `www` back to non-www or force `.html` to extensionless URLs.
@@ -537,14 +539,14 @@ When adding a public blog post:
 - Add FAQ schema if there is an FAQ.
 - Add internal links to services, Flex Credits, area pages and related blog posts where natural.
 - Add URL to `sitemap.xml`.
-- Use `https://www.wagandwalk.uk/blog/slug.html` canonical.
+- Use `https://www.wagandwalk.uk/blog/slug` canonical.
 
 When adding a Behind The Lead post:
 
 - Create under `behind-the-lead/`.
 - Add to `behind-the-lead.html`.
 - Add to `sitemap.xml` if it should be public.
-- Use `https://www.wagandwalk.uk/behind-the-lead/slug.html` canonical.
+- Use `https://www.wagandwalk.uk/behind-the-lead/slug` canonical.
 - Use `index, follow` only when the post is ready to publish.
 
 ### Google Preferred Sources
@@ -620,7 +622,7 @@ When policies are changed:
 
 Deployment target:
 
-- Cloudflare Pages
+- Cloudflare Workers with static assets
 
 Files relevant to deployment:
 

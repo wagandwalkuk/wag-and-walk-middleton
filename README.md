@@ -1,6 +1,6 @@
 # Wag & Walk Middleton Website
 
-Static HTML website for Wag & Walk Middleton, ready for Cloudflare Pages.
+Static HTML website for Wag & Walk Middleton, deployed through Cloudflare Workers with static assets.
 
 ## Before making changes
 
@@ -14,17 +14,13 @@ The `_redirects` file only contains relative static asset redirects, for example
 
 Do not add non-www to www domain redirects to `_redirects`. Cloudflare static asset redirects can reject absolute URL rules in this context.
 
-Handle the non-www to www redirect in the Cloudflare dashboard using a Redirect Rule:
-
-- Source hostname: `wagandwalk.uk`
-- Target: `https://www.wagandwalk.uk/${uri.path}`
-- Status code: `301`
+`src/worker.js` handles HTTPS, www and clean document URL redirects before static assets, using `run_worker_first` in `wrangler.jsonc`. Do not add competing dashboard rules. See `docs/seo-audit-2026-09.md` for validation and indexing guidance.
 
 ## Deployment files
 
 Non-public files such as `.git`, `.wrangler`, `node_modules`, environment files and local project metadata are excluded via `.assetsignore`.
 
-Do not upload a root-level `_worker.js` file with the static site. Wrangler blocks Pages `_worker.js` files from being uploaded as public assets. Non-www to www redirects should be handled in the Cloudflare dashboard instead.
+Do not upload a root-level `_worker.js` file with the static site. Wrangler blocks Pages `_worker.js` files from being uploaded as public assets. The active Worker entry point is `src/worker.js`.
 
 
 ## Hub meet-and-greet request ingestion
