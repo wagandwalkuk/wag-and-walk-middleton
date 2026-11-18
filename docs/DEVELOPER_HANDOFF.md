@@ -1,6 +1,6 @@
 # Wag & Walk Middleton Website Handoff Guide
 
-Last reviewed: 10 September 2026
+Last reviewed: 18 November 2026
 
 Read `docs/seo-audit-2026-09.md` for the latest verified indexing findings and `docs/seo-audit-2026-08.md` for the canonical migration rationale.
 
@@ -233,23 +233,19 @@ External Google Form:
 
 ## Pricing Model
 
-Current visible pricing:
+Current visible pricing (18 November 2026):
 
-Regular bookings:
+| Service | Standard | Regular (agreed 3+ visits per week) |
+| --- | ---: | ---: |
+| 30-minute solo walk | £14 | £13 |
+| 60-minute solo walk | £19 | £18 |
+| 30-minute walk + 30-minute walk | £20 | £19 |
+| 30-minute walk + 15-minute drop-in | £17 | £16 |
+| House visit / drop-in | £14 | £12 |
 
-- 30 min solo walk: `£12`
-- 60 min solo walk: `£18`
-- Additional pet from the same household: `+ £5`
+Additional dog from the same household: +£5 per visit, subject to suitability and safe handling. The standard rate applies to one-off and variable bookings. 60-minute walks and split-day options are by arrangement, subject to availability and location.
 
-Recurring bookings:
-
-- 30 min solo walk: `£11`
-- 60 min solo walk: `£16`
-- Additional pet from the same household: `+ £4`
-
-House visits:
-
-- House visit: `£11`
+The supplied new rate card did not include Flex Credits. Their separate published rates and packs remain as below until separately changed.
 
 Flex Credits:
 
